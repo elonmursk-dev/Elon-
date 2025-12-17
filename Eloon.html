@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elon Musk Giveaway Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #00c7ff;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #00c7ff, #00ffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0b0ff;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .giveaway-info {
+            background: rgba(20, 30, 60, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 199, 255, 0.2);
+        }
+
+        .giveaway-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00ffaa;
+            text-align: center;
+        }
+
+        .prizes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .prize-card {
+            background: rgba(10, 25, 60, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0, 199, 255, 0.2);
+        }
+
+        .prize-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 199, 255, 0.2);
+        }
+
+        .prize-card i {
+            font-size: 3rem;
+            color: #00c7ff;
+            margin-bottom: 15px;
+        }
+
+        .prize-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #00ffaa;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(0, 199, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 199, 255, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #00ffaa;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            min-width: 220px;
+            justify-content: center;
+        }
+
+        .btn i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .telegram-btn {
+            background: #0088cc;
+            color: white;
+        }
+
+        .telegram-btn:hover {
+            background: #006699;
+            transform: scale(1.05);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1da851;
+            transform: scale(1.05);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .step {
+            background: rgba(20, 30, 60, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(0, 199, 255, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: #00c7ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #0a0a2a;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00ffaa;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b0ff;
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: rgba(255, 50, 50, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .giveaway-info h2, .cta-section h2 {
+                font-size: 1.7rem;
+            }
+            
+            .btn {
+                min-width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .prizes, .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .giveaway-info, .prize-card, .step, .cta-section {
+                padding: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated stars background -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                <h1>Elon Musk Giveaway Program</h1>
+            </div>
+            <p class="tagline">Participate in the exclusive giveaway for a chance to win futuristic prizes inspired by Elon Musk's vision for humanity's future!</p>
+        </header>
+
+        <section class="giveaway-info">
+            <h2>🚀 Win Amazing Futuristic Prizes!</h2>
+            <p>To celebrate Elon Musk's vision for a multiplanetary future, we're giving away incredible prizes to lucky participants. Connect with us via Telegram or WhatsApp to learn more and claim your potential wins!</p>
+            
+            <div class="prizes">
+                <div class="prize-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Tesla cars</h3>
+                    <p>Experience the future of transportation with a brand new Tesla Model 3 - the electric car that's changing the world.</p>
+                </div>
+                <div class="prize-card">
+                    <i class="fas fa-satellite"></i>
+                    <h3>Starlink Internet</h3>
+                    <p>Get 1 year of free high-speed satellite internet with the revolutionary Starlink system.</p>
+                </div>
+                <div class="prize-card">
+                    <i class="fas fa-user-astronaut"></i>
+                    <h3>SpaceX Experience</h3>
+                    <p>An exclusive tour of SpaceX facilities and a chance to meet the engineering teams.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Join the Program</h3>
+                <p>Connect with us on Telegram or WhatsApp to join the giveaway program and get your participant ID.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Complete Application Process</h3>
+                <p>Follow simple instructions to enable smooth process in other to claim winning.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Claim Your Prize</h3>
+                <p>If you win, contact us immediately through the same channels to claim your amazing prize.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Claim Your Win or Learn More!</h2>
+            <p>Whether you're a potential winner or just want to learn more about this exclusive Elon Musk-inspired giveaway, connect with us directly through Telegram or WhatsApp. Our team is available 24/7 to assist you.</p>
+            
+            <div class="contact-buttons">
+                <a href="https://t.me/ElornMuskT" target="_blank" class="btn telegram-btn">
+                    <i class="fab fa-telegram"></i> Connect on Telegram
+                </a>
+                <a href="https://wa.me/+19154993805" target="_blank" class="btn whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                </a>
+            </div>
+            
+            <p style="margin-top: 25px; font-size: 1rem;">Click the buttons above to instantly connect with our support team!</p>
+        </section>
+
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> This is an independent project officially affiliated with Elon Musk, Tesla, SpaceX.</p>
+        </div>
+
+        <footer>
+            <p>Elon Musk Giveaway Program | Inspired by the future of technology and innovation</p>
+            <p>© 2025 All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Random size (between 1-3px)
+                const size = Math.random() * 2 + 1;
+                
+                // Random opacity
+                const opacity = Math.random() * 0.7 + 0.3;
+                
+                // Random animation duration (between 3-8 seconds)
+                const duration = Math.random() * 5 + 3;
+                
+                // Set star properties
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.opacity = opacity;
+                star.style.animation = `twinkle ${duration}s infinite alternate`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Add the keyframes for twinkling animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes twinkle {
+                    0% { opacity: ${Math.random() * 0.3 + 0.3}; }
+                    100% { opacity: ${Math.random() * 0.7 + 0.5}; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Create stars when page loads
+        document.addEventListener('DOMContentLoaded', createStars);
+        
+        // Add hover effect to prize cards
+        document.querySelectorAll('.prize-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'rotate(10deg) scale(1.2)';
+                    icon.style.transition = 'transform 0.3s';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg) scale(1)';
+                }
+            });
+        });
+        
+        // Telegram and WhatsApp button click handlers (for demo purposes)
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    const platform = this.classList.contains('telegram-btn') ? 'Telegram' : 'WhatsApp';
+                    alert(`In a real implementation, this would redirect to ${platform}. For this demo, please replace the href attribute with your actual ${platform} link.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
